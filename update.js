@@ -1,9 +1,14 @@
 swal({
-    title: '哈囉，工具目前需要更新!',
+    title: '哈囉，工具有新版了!',
     text: '請問你要現在更新嗎?',
-    imageUrl: 'update.png',
-    imageWidth: 640,
-    imageHeight: 480,
-    imageAlt: 'Custom image',
-    animation: false
+    type: 'info',
+    animation: true,
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: '移動至更新頁面',
+    cancelButtonText: '之後再說'
+
+  }).then(function () {
+    window.open("https://chrome.google.com/webstore/detail/ntust-credit-counter/gpcfnaccomfiionfglcphcoiokbcmiie?hl=zh-TW");
   })
