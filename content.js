@@ -447,7 +447,6 @@ var courseCounter = {
                                         grade : "抵免",
                                         isCounted:true
                                     } );
-
                                     overToCourses.push( {
                                         name: course.name + "(超出學分移至自由學分)",
                                         credit : overCredit,
@@ -487,7 +486,7 @@ var courseCounter = {
             if(optionalCreditCounter >= course.credit){
                 course.status = "通過";
             }else{
-                course.status = "已修習 " + CreditCounter + " 學分";
+                course.status = "已修習 " + optionalCreditCounter + " 學分";
             }
         }
     }
