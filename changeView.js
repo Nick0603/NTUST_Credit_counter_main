@@ -4,7 +4,7 @@ function createDiv(claassName){
 
 function createTable(className){
     return "" +
-        '<table class="table table-striped">'+
+        '<table class="table">'+
         '   <thead> '+
         '        <tr>'+
         '            <td>科目名稱</td>'+
