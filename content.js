@@ -174,18 +174,19 @@ var courseCounter = {
     parserCourseInfo: function ( course ){
         var cleanCourse = {};
         // 區隔錯誤表格資料
-        if( course.childElementCount < 7){
+        if( course.childElementCount != 8){
             return null;
         }
-        // 暑期修課
-        if( course.childElementCount == 7){
-            cleanCourse.semester = 0;
-            cleanCourse.code  = course.children[1].innerText;
-            cleanCourse.name = course.children[2].innerText;
-            cleanCourse.grade = course.children[4].innerText;
-            cleanCourse.credit = parseInt(course.children[3].innerText);
-            return cleanCourse;
-        }
+        // // 暑期修課
+        // if( course.childElementCount == 7){
+        //     cleanCourse.semester = 0;
+        //     cleanCourse.code  = course.children[1].innerText;
+        //     cleanCourse.name = course.children[2].innerText;
+        //     cleanCourse.grade = course.children[4].innerText;
+        //     cleanCourse.credit = parseInt(course.children[3].innerText);
+        //     return cleanCourse;
+        // }
+        
         // 抵免、免修課
         if( course.children[2].innerText == "抵免" || course.children[2].innerText == "免修"){
             // 取的學期 0=>不分學期 1=>上學期  2=>下學期   e.g.: 1031 => 取得個位數數字
@@ -437,17 +438,24 @@ var courseCounter = {
                         }else{
                             var CreditCounter = courseCounter.getCorusesPassCredit(learnedCourses,course.credit);
                             if(CreditCounter >= course.credit){
-                                course.status = "通過(" + CreditCounter + ")";
+                                course.status = "通過";
                                 var overCredit = CreditCounter - course.credit;
                                 if(overCredit > 0){
+                                    learnedCourses.push( {
+                                        name: course.name + "(超出學分移至自由學分)",
+                                        credit : -1 * overCredit,
+                                        grade : "抵免",
+                                        isCounted:true
+                                    } );
+
                                     overToCourses.push( {
-                                        name: course.name + "(超出學分)",
+                                        name: course.name + "(超出學分移至自由學分)",
                                         credit : overCredit,
                                         grade : "抵免"
                                     } );
                                 }
                             }else{
-                                course.status = "未通過(" + CreditCounter + ")";
+                                course.status = "已修習 " + CreditCounter + " 學分";
                             }
                         }
                     }
@@ -477,9 +485,9 @@ var courseCounter = {
             var course = graduationCourses[i];
             var optionalCreditCounter = courseCounter.getCorusesPassCredit(otherCourses);
             if(optionalCreditCounter >= course.credit){
-                course.status = "通過(" + optionalCreditCounter + ")";
+                course.status = "通過";
             }else{
-                course.status = "未通過(" + optionalCreditCounter + ")";
+                course.status = "已修習 " + CreditCounter + " 學分";
             }
         }
     }

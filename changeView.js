@@ -161,7 +161,10 @@ var view = {
                             .addClass( course.name )
                             .text( course.status )
                     )
-            if(course.status.indexOf("未通過") != -1 || course.status == "尚未修課"){
+            if(course.status.indexOf("未通過") != -1 || 
+               course.status == "尚未修課"           ||
+               course.status.indexOf("已修習") != -1 
+            ){
                 $(".Shortaged-table-body").append(newData.clone());
                 newData.addClass("danger");
             }
