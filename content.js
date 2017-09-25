@@ -83,37 +83,37 @@ var courseCounter = {
                     checkCode:"FE"
                 }
             );
+        }
+        
+        var courseIndex = ObjectIndexOf({name:"校定英文能力會考"},learnedEnglishCourses,["name"]);
+        var course = learnedEnglishCourses[courseIndex];
+        if(courseIndex != -1 && course.grade=="通過"){
+            graduatedEnglishCourses.splice(0,0,
+                {
+                    name:"校定英文能力會考",
+                    semester:0,
+                    credit:2,
+                }
+            );
         }else{
-            var courseIndex = ObjectIndexOf({name:"校定英文能力會考"},learnedEnglishCourses,["name"]);
-            var course = learnedEnglishCourses[courseIndex];
-            if(courseIndex == -1){
-                graduatedEnglishCourses.splice(0,0,
-                    {
-                        name:"英文實務(會考未通過)",
-                        semester:0,
-                        credit:2,
-                        isSpecialCheck:true,
-                        checkWord:"英文實務"
-                    }
-                );
-                courseCounter.classifiedCourses.otherCourses.push(
-                    {
-                        name:"英文實務(系統自動新增，因為新增必修且可抵自由學分)",
-                        semester:0,
-                        credit:2,
-                        code:"",
-                        grade:"抵免"
-                    }
-                );
-            }else{
-                graduatedEnglishCourses.splice(0,0,
-                    {
-                        name:"校定英文能力會考",
-                        semester:0,
-                        credit:2,
-                    }
-                );
-            }
+            graduatedEnglishCourses.splice(0,0,
+                {
+                    name:"英文實務(會考未通過)",
+                    semester:0,
+                    credit:2,
+                    isSpecialCheck:true,
+                    checkWord:"英文實務"
+                }
+            );
+            courseCounter.classifiedCourses.otherCourses.push(
+                {
+                    name:"英文實務(系統自動新增，因為新增必修且可抵自由學分)",
+                    semester:0,
+                    credit:2,
+                    code:"",
+                    grade:"抵免"
+                }
+            );
         }
     },
     getCoursePassStatus:function(courses,checkCredit){
